@@ -122,12 +122,59 @@ diff --git a/.gitignore b/.gitignore
 index dfcfd56..e2afd61 100644
 --- a/.gitignore
 +++ b/.gitignore
-@@ -17,6 +17,7 @@
+@@ -17,6 +17,8 @@
  mono_crash.*
  
  # Build results
 +*.egg-info/
++build/
  [Dd]ebug/
  [Dd]ebugPublic/
  [Rr]elease/
 ```
+
+至此，我们就可以尝试把这个 pecan project 运行起来了，通过 `pip install .` 安装，通过 `pecan serve config.py` 在本地运行
+
+```console
+$ pip install .
+...
+Requirement already satisfied: pecan in ./.venv/lib/python3.9/site-packages (from rest-demo==0.1) (1.4.1)
+...
+Successfully built rest-demo
+Installing collected packages: rest-demo
+Successfully installed rest-demo-0.1
+
+$ pecan serve config.py
+Starting server in PID 51451
+serving on 0.0.0.0:8080, view at http://127.0.0.1:8080
+```
+
+![](images/pecan-init-page.png)
+
+在这里搜索，会跳转到 pecan 官方文档。
+
+### 2.2.2 本地调试
+
+前面的步骤，需要在先 pip 安装，然后通过 pecan 起本地的 http server，不便于本地调试，我们尝试增加一个 run.py，让本地调试变得容易。
+
+![](images/local-debug.png)
+
+### 2.2.3 开发和测试框架
+
+增加依赖组件版本控制文件：
+
+- [requirements.txt](/requirements.txt)
+- [test-requirements.txt](/test-requirements.txt)
+- [lower-constraints.txt](/lower-constraints.txt)
+
+增加 tox 配置文件 `tox.ini`，添加 hacking 目录，`.stestr.conf` 配置文件
+
+至此，我们可以比较方便地进行测试：
+
+```bash
+# tox -e pep8
+# tox -e py3
+tox
+```
+
+### 2.2.4 容器化部署

@@ -18,6 +18,8 @@ mono_crash.*
 
 # Build results
 *.egg-info/
+build/
+.stestr/
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/

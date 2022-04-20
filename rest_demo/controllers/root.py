@@ -1,4 +1,5 @@
-from pecan import expose, redirect
+from pecan import expose
+from pecan import redirect
 from webob.exc import status_map
 
 
