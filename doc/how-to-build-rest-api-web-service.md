@@ -12,7 +12,7 @@
 2. 代码风格检查：`tox -e pep8`
 3. 覆盖率测试报告：`coverage` / `tox -e cover`
 4. 源码包生成：`python setup.py sdist` / `python setup.py bdist_wheel`
-5.  国际化：`babel`
+5. 国际化：`babel`
 6. 文档生成：`sphinx-build`
 7. 自动格式化代码风格 `pylint`
 8. API 接口文档：`API Doc` / `Swagger`
@@ -167,7 +167,7 @@ serving on 0.0.0.0:8080, view at http://127.0.0.1:8080
 - [test-requirements.txt](/test-requirements.txt)
 - [lower-constraints.txt](/lower-constraints.txt)
 
-增加 tox 配置文件 `tox.ini`，添加 hacking 目录，`.stestr.conf` 配置文件
+增加 tox 配置文件 `tox.ini`，添加 `hacking` 目录，`.stestr.conf` 配置文件
 
 至此，我们可以比较方便地进行测试：
 
@@ -178,3 +178,5 @@ tox
 ```
 
 ### 2.2.4 容器化部署
+
+添加 `Dockerfile`、`.dockerignore`、`start.sh` 文件和 `deploy` 目录。

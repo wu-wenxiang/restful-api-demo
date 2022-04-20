@@ -1,0 +1,10 @@
+.DS_Store
+.dockerignore
+.gitignore
+.drone.yml
+README.md
+**/*.pyc
+**/.venv
+**/__pycache__
+**/rest_demo.egg-info
+**/build
