@@ -13,6 +13,16 @@ tests:
   url: /v1/users?page_size=-1
   method: GET
   status: 200
+- name: create-token
+  url: /v1/tokens
+  method: POST
+  data:
+    user:
+      name: testName
+      account: testAccount
+      email: testEmail
+      password: testPassword
+  status: 200
 - name: create-user
   url: /v1/users
   method: POST
