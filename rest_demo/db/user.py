@@ -5,7 +5,7 @@ from rest_demo.package import utils
 
 def create(user):
     user.setdefault('password', '')
-    user['password'] = utils.ash_md5(user['password'])
+    user['password'] = utils.hash_md5(user['password'])
 
     instance = User(**user)
     return db.create(instance)
@@ -17,3 +17,7 @@ def get(id):
 
 def list():
     return db.list(User)
+
+
+def delete(id):
+    return db.delete(User, id)

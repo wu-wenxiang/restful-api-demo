@@ -4,8 +4,8 @@ import platform
 
 # Server Specific Configurations
 server = {
-    'port': '8080',
-    'host': '0.0.0.0'
+    'port': '8081',
+    'host': 'localhost'
 }
 
 # Pecan Application Configurations

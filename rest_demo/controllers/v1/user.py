@@ -17,3 +17,7 @@ class UsersController(RestController):
     @expose('json')
     def post(self, user):
         return db_user.create(user)
+
+    @expose('json')
+    def delete(self, id):
+        return db_user.delete(id)

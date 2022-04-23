@@ -1,0 +1,52 @@
+fixtures:
+- ConfigFixture
+- SampleDataFixture
+
+defaults:
+  ssl: False
+  request_headers:
+    content-type: application/json
+    accept: application/json
+
+tests:
+- name: list-users-1
+  url: /v1/users?page_size=-1
+  method: GET
+  status: 200
+- name: create-user
+  url: /v1/users
+  method: POST
+  data:
+    user:
+      name: testName
+      account: testAccount
+      email: testEmail
+      password: testPassword
+  status: 200
+  response_json_paths:
+    $.name: testName
+    $.account: testAccount
+    $.email: testEmail
+- name: create-user-duplicate
+  url: /v1/users
+  method: POST
+  data:
+    user:
+      name: testName
+      account: testAccount
+      email: testEmail
+      password: testPassword
+  status: 409
+- name: get-user-1
+  url: /v1/users/$HISTORY['create-user'].$RESPONSE['$.id']
+  method: GET
+  status: 200
+  response_json_paths:
+    $.id: $HISTORY['create-user'].$RESPONSE['$.id']
+    $.name: testName
+    $.account: testAccount
+    $.email: testEmail
+- name: delete-user
+  url: /v1/users/$HISTORY['create-user'].$RESPONSE['$.id']
+  method: DELETE
+  status: 200

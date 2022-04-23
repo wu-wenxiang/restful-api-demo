@@ -194,3 +194,7 @@ tox
 3. `model/user.py` 里面创建了一个简单的 User
 4. 在 `datainit.py` 中完成数据初始化
 5. 在 controller 里面调用，参考：<https://pecan.readthedocs.io/en/latest/rest.html#writing-restful-web-services-with-restcontroller>
+
+### 2.4 添加 Gabbi 接口测试
+
+[gabbi 接口测试](/gabbi/README.md)

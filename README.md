@@ -20,12 +20,23 @@ python run.py
 curl http://localhost:8080/
 ```
 
-## 测试
+## 单元测试和代码格式检查
 
 ```bash
 # python setup.py test -q
 # stestr run
 tox
+```
+
+## 接口测试
+
+```bash
+cd gabbi
+
+ls *.yaml | xargs gabbi-run localhost:8080 --
+
+# show verbose
+gabbi-run -v all localhost:8080 -- crud-user.yaml
 ```
 
 ## 容器镜像制作和部署
