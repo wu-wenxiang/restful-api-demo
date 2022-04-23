@@ -181,7 +181,7 @@ tox
 
 添加 `Dockerfile`、`.dockerignore`、`start.sh` 文件和 `deploy` 目录。
 
-### 2.3 数据库
+### 2.3 打通模型和控制器
 
 参考：<https://pecan.readthedocs.io/en/latest/databases.html>
 
@@ -193,4 +193,4 @@ tox
 2. `app.py` 中为 `make_app` 添加 transaction hook
 3. `model/user.py` 里面创建了一个简单的 User
 4. 在 `datainit.py` 中完成数据初始化
-5. 在 controller 里面调用
+5. 在 controller 里面调用，参考：<https://pecan.readthedocs.io/en/latest/rest.html#writing-restful-web-services-with-restcontroller>

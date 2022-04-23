@@ -1,23 +1,13 @@
 from pecan import expose
-from pecan import redirect
-from webob.exc import status_map
+
+from rest_demo.controllers.user import UsersController
+from rest_demo.package import const
 
 
 class RootController(object):
 
-    @expose(generic=True, template='index.html')
+    @expose('json')
     def index(self):
-        return dict()
+        return {'version': const.VERSION}
 
-    @index.when(method='POST')
-    def index_post(self, q):
-        redirect('https://pecan.readthedocs.io/en/latest/search.html?q=%s' % q)
-
-    @expose('error.html')
-    def error(self, status):
-        try:
-            status = int(status)
-        except ValueError:  # pragma: no cover
-            status = 500
-        message = getattr(status_map.get(status), 'explanation', '')
-        return dict(status=status, message=message)
+    users = UsersController()

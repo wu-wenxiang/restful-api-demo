@@ -4,6 +4,7 @@ from sqlalchemy.orm import sessionmaker
 import config
 from rest_demo.model import Base
 from rest_demo.model import user
+from rest_demo.package import utils
 
 
 def init_db():
@@ -16,7 +17,7 @@ def init_db():
     admin = user.User(
         account='admin',
         name='Tom Cat',
-        password='e10adc3949ba59abbe56e057f20f883e',
+        password=utils.hash_md5('123456'),
         email='tom.cat@test.com'
     )
     session.add(admin)
