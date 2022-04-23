@@ -1,3 +1,8 @@
+import os
+import platform
+import sqlite3
+
+
 # Server Specific Configurations
 server = {
     'port': '8080',
@@ -44,6 +49,17 @@ logging = {
         '__force_dict__': True
         }
     }
+}
+
+DB_DEFAULT_NAME = 'rest-demo.db'
+DB_DEFAULT_PATH = f'/tmp/{DB_DEFAULT_NAME}'  # MAC & Linux
+if platform.system() == 'Windows':
+    DB_DEFAULT_PATH = os.path.join(os.path.dirname(__file__), DB_DEFAULT_NAME)
+sqlalchemy = {
+    'url': os.getenv('db_url') or (
+        f"sqlite:///{DB_DEFAULT_PATH}?check_same_thread=False"
+    ),
+    'echo': True
 }
 
 # Custom Configurations must be in Python dictionary format::

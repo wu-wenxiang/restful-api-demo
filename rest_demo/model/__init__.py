@@ -1,16 +1,34 @@
-from pecan import conf  # noqa
+from pecan import conf
+from sqlalchemy import create_engine, MetaData
+from sqlalchemy.orm import scoped_session, sessionmaker
+
+
+Session = scoped_session(sessionmaker())
+metadata = MetaData()
+
+
+def _engine_from_config(configuration):
+    configuration = dict(configuration)
+    url = configuration.pop('url')
+    return create_engine(url, **configuration)
 
 
 def init_model():
-    """init_model demo
+    conf.sqlalchemy.engine = _engine_from_config(conf.sqlalchemy)
 
-    This is a stub method which is called at application startup time.
 
-    If you need to bind to a parsed database configuration, set up tables or
-    ORM classes, or perform any database initialization, this is the
-    recommended place to do it.
+def start():
+    Session.bind = conf.sqlalchemy.engine
+    metadata.bind = Session.bind
 
-    For more information working with databases, and some common recipes,
-    see https://pecan.readthedocs.io/en/latest/databases.html
-    """
-    pass
+
+def commit():
+    Session.commit()
+
+
+def rollback():
+    Session.rollback()
+
+
+def clear():
+    Session.remove()

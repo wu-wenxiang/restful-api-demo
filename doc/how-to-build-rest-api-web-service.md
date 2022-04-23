@@ -153,13 +153,13 @@ serving on 0.0.0.0:8080, view at http://127.0.0.1:8080
 
 在这里搜索，会跳转到 pecan 官方文档。
 
-### 2.2.2 本地调试
+#### 2.2.2 本地调试
 
 前面的步骤，需要在先 pip 安装，然后通过 pecan 起本地的 http server，不便于本地调试，我们尝试增加一个 run.py，让本地调试变得容易。
 
 ![](images/local-debug.png)
 
-### 2.2.3 开发和测试框架
+#### 2.2.3 开发和测试框架
 
 增加依赖组件版本控制文件：
 
@@ -177,8 +177,14 @@ serving on 0.0.0.0:8080, view at http://127.0.0.1:8080
 tox
 ```
 
-### 2.2.4 容器化部署
+#### 2.2.4 容器化部署
 
 添加 `Dockerfile`、`.dockerignore`、`start.sh` 文件和 `deploy` 目录。
 
+### 2.3 数据库
+
+参考：<https://pecan.readthedocs.io/en/latest/databases.html>
+
 增加 `production_config.py`，关闭生成环境中的 debug
+
+`tests/config.py` 用 in memory 的 sqlite，参考：<https://docs.sqlalchemy.org/en/14/dialects/sqlite.html#connect-strings>

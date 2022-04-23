@@ -20,3 +20,5 @@ sphinxcontrib-httpdomain==1.7.0 # Apache-2.0
 doc8==0.8.1 # Apache-2.0
 Pygments==2.7.2 # BSD
 os-api-ref==2.1.0 # Apache-2.0
+isort==5.10.1 # MIT
+black==22.3.0 # MIT
