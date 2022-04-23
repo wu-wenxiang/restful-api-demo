@@ -1,4 +1,4 @@
 #!/bin/sh
 
 nginx
-gunicorn_pecan config.py
+gunicorn_pecan production_config.py

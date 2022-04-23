@@ -180,3 +180,5 @@ tox
 ### 2.2.4 容器化部署
 
 添加 `Dockerfile`、`.dockerignore`、`start.sh` 文件和 `deploy` 目录。
+
+增加 `production_config.py`，关闭生成环境中的 debug
