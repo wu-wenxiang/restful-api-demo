@@ -188,3 +188,9 @@ tox
 增加 `production_config.py`，关闭生成环境中的 debug
 
 `tests/config.py` 用 in memory 的 sqlite，参考：<https://docs.sqlalchemy.org/en/14/dialects/sqlite.html#connect-strings>
+
+1. `init_model` 方法中定义 hook 函数
+2. `app.py` 中为 `make_app` 添加 transaction hook
+3. `model/user.py` 里面创建了一个简单的 User
+4. 在 `datainit.py` 中完成数据初始化
+5. 在 controller 里面调用

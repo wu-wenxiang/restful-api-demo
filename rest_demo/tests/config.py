@@ -1,6 +1,3 @@
-from pecan import conf
-
-
 # Server Specific Configurations
 server = {
     'port': '8080',
@@ -20,10 +17,12 @@ app = {
     }
 }
 
-sqlalchemy = {
+sqlalchemy_w = {
     'url': 'sqlite://',
     'echo': True
 }
+
+sqlalchemy_ro = sqlalchemy_w
 
 # Custom Configurations must be in Python dictionary format::
 #

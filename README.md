@@ -10,10 +10,8 @@ python -m virtualenv .venv
 
 # 安装依赖
 pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
-# 清理 sqlite 数据库
-rm -rf /tmp/rest-demo.db
-# 初始化数据库
-python datainit.py
+# 清理 sqlite 数据库 && 初始化数据库
+rm -rf /tmp/rest-demo.db && python datainit.py
 
 # 启动 web 服务
 python run.py

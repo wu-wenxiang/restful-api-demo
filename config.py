@@ -55,12 +55,16 @@ DB_DEFAULT_NAME = 'rest-demo.db'
 DB_DEFAULT_PATH = f'/tmp/{DB_DEFAULT_NAME}'  # MAC & Linux
 if platform.system() == 'Windows':
     DB_DEFAULT_PATH = os.path.join(os.path.dirname(__file__), DB_DEFAULT_NAME)
-sqlalchemy = {
+
+# Master database
+sqlalchemy_w = {
     'url': os.getenv('db_url') or (
         f"sqlite:///{DB_DEFAULT_PATH}?check_same_thread=False"
     ),
     'echo': True
 }
+# Read Only database
+sqlalchemy_ro = sqlalchemy_w
 
 # Custom Configurations must be in Python dictionary format::
 #
