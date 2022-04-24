@@ -1,5 +1,8 @@
 # Rest API Web Service
 
+- Github: <https://github.com/wu-wenxiang/restful-api-demo>
+- 同步到 Gitee: <https://gitee.com/wu-wen-xiang/restful-api-demo>
+
 ## 本地调试
 
 ```bash
