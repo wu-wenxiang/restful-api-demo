@@ -1,0 +1,56 @@
+fixtures:
+- ConfigFixture
+- SampleDataFixture
+
+defaults:
+  ssl: False
+  request_headers:
+    content-type: application/json
+    accept: application/json
+
+tests:
+- name: create-token-password
+  url: /v1/tokens
+  method: POST
+  data:
+    auth:
+      methods:
+      - password
+      password:
+        account: admin
+        password: "123456"
+  status: 200
+- name: create-token-token-1
+  url: /v1/tokens
+  method: POST
+  data:
+    auth:
+      methods:
+      - token
+      token:
+        token: $HISTORY['create-token-password'].$RESPONSE['$.token']
+  status: 200
+- name: create-token-token-2
+  url: /v1/tokens
+  method: POST
+  data:
+    auth:
+      methods:
+      - token
+      token:
+        token: $HISTORY['create-token-token-1'].$RESPONSE['$.token']
+  status: 200
+- name: create-token-token-3
+  url: /v1/tokens
+  method: POST
+  data:
+    auth:
+      methods:
+      - token
+      - password
+      password:
+        account: admin
+        password: "123456"
+      token:
+        token: $HISTORY['create-token-token-1'].$RESPONSE['$.token']
+  status: 200

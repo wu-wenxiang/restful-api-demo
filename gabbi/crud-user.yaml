@@ -9,23 +9,33 @@ defaults:
     accept: application/json
 
 tests:
-- name: list-users-1
-  url: /v1/users?page_size=-1
-  method: GET
-  status: 200
-- name: create-token
+- name: signin
   url: /v1/tokens
   method: POST
   data:
-    user:
-      name: testName
-      account: testAccount
-      email: testEmail
-      password: testPassword
+    auth:
+      methods:
+      - password
+      password:
+        account: admin
+        password: "123456"
+  status: 200
+  # TODO(wu.wenxiang) TOKEN expire setting
+  # TODO(wu.wenxiang) page_num & page_size
+  # TODO(wu.wenxiang) API doc
+  # TODO(wu.wenxiang) 级联删除
+  # TODO(wu.wenxiang) 多对多，一对多
+- name: list-users-1
+  url: /v1/users?page_size=-1
+  method: GET
+  request_headers:
+    cookie: token=$HISTORY['signin'].$RESPONSE['$.token']
   status: 200
 - name: create-user
   url: /v1/users
   method: POST
+  request_headers:
+    cookie: token=$HISTORY['signin'].$RESPONSE['$.token']
   data:
     user:
       name: testName
@@ -40,6 +50,8 @@ tests:
 - name: create-user-duplicate
   url: /v1/users
   method: POST
+  request_headers:
+    cookie: token=$HISTORY['signin'].$RESPONSE['$.token']
   data:
     user:
       name: testName
@@ -50,6 +62,8 @@ tests:
 - name: get-user-1
   url: /v1/users/$HISTORY['create-user'].$RESPONSE['$.id']
   method: GET
+  request_headers:
+    cookie: token=$HISTORY['signin'].$RESPONSE['$.token']
   status: 200
   response_json_paths:
     $.id: $HISTORY['create-user'].$RESPONSE['$.id']
@@ -59,4 +73,6 @@ tests:
 - name: delete-user
   url: /v1/users/$HISTORY['create-user'].$RESPONSE['$.id']
   method: DELETE
+  request_headers:
+    cookie: token=$HISTORY['signin'].$RESPONSE['$.token']
   status: 200

@@ -37,17 +37,24 @@ def create(instance):
 
 
 @try_db
-def get(model, id):
+def get(model, **kwargs):
     query = Session.query(model)
-    return query.filter_by(id=id).one()
+    return query.filter_by(**kwargs).one()
 
 
 @try_db
-def list(model):
+def try_get(model, **kwargs):
     query = Session.query(model)
-    return query.all()
+    return query.filter_by(**kwargs).one_or_none()
 
 
 @try_db
-def delete(model, id):
-    Session.query(model).filter_by(id=id).delete(synchronize_session="fetch")
+def list(model, **kwargs):
+    query = Session.query(model)
+    return query.filter_by(**kwargs).all()
+
+
+@try_db
+def delete(model, **kwargs):
+    Session.query(model).filter_by(**kwargs).delete(
+        synchronize_session="fetch")

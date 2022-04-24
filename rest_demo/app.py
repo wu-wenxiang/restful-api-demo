@@ -1,20 +1,13 @@
-from pecan import abort
 from pecan import hooks
 from pecan import make_app
-import re
 
 from rest_demo import model
+from rest_demo.package.auth import assert_login
 
-RE_TOKEN_PATH = re.compile(r'/v\d+/tokens/?', re.IGNORECASE)
 
 class CustomHook(hooks.PecanHook):
     def before(self, state):
-        if all([
-            RE_TOKEN_PATH.search(state.request.path),
-            state.request.method == 'POST'
-        ]):
-            return
-        abort(401, f'please signin')
+        assert_login(state.request)
 
 
 def setup_app(config):

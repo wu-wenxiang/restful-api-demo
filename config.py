@@ -1,6 +1,5 @@
 import os
 import platform
-import sqlite3
 
 
 # Server Specific Configurations

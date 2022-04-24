@@ -12,7 +12,7 @@ def create(user):
 
 
 def get(id):
-    return db.get(User, id)
+    return db.get(User, id=id)
 
 
 def list():
@@ -20,4 +20,4 @@ def list():
 
 
 def delete(id):
-    return db.delete(User, id)
+    return db.delete(User, id=id)
