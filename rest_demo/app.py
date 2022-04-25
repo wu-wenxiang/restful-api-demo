@@ -2,12 +2,17 @@ from pecan import hooks
 from pecan import make_app
 
 from rest_demo import model
-from rest_demo.package.auth import assert_login
+from rest_demo.package import auth
 
 
 class CustomHook(hooks.PecanHook):
     def before(self, state):
-        assert_login(state.request)
+        auth.assert_login(state.request)
+        auth.assert_permission(state.request)
+        return super().before(state)
+
+    def on_error(self, state, e):
+        return super().on_error(state, e)
 
 
 def setup_app(config):

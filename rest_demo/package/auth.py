@@ -7,6 +7,8 @@ from pecan import abort
 from pecan import request
 import re
 
+from rest_demo.package.const import PUBLIC_URLS
+
 JWT_KEY = "jwt_key"
 SECRET_KEY = "SECRET_KEY"
 
@@ -34,13 +36,8 @@ def decode_token(jwt_token):
 
 
 public_urls = [
-    ('GET', r'^/$'),
-    ('GET', r'^/v\d+/?$'),
-    ('POST', r'^/v\d+/tokens/?$'),
-]
-public_urls = [
     {'method': i[0], 'url': re.compile(i[1], re.IGNORECASE)}
-    for i in public_urls
+    for i in PUBLIC_URLS
 ]
 
 
@@ -56,3 +53,8 @@ def assert_login(state_request):
     if not token:
         abort(401, 'Please signin.')
     state_request.token = token
+
+
+def assert_permission(state_request):
+    pass
+    # TODO(wu.wenxiang)
