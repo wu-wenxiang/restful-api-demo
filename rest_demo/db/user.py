@@ -1,6 +1,9 @@
 from rest_demo import db
+from rest_demo.model import Session
 from rest_demo.model.user import User
 from rest_demo.package import utils
+
+from sqlalchemy.orm import joinedload
 
 
 def create(user):
@@ -12,7 +15,10 @@ def create(user):
 
 
 def get(id):
-    return db.get(User, id=id)
+    query = Session.query(User).options(
+        joinedload(User.books),
+    )
+    return db.get(query=query, id=id)
 
 
 def list():

@@ -37,8 +37,9 @@ def create(instance):
 
 
 @try_db
-def get(model, **kwargs):
-    query = Session.query(model)
+def get(model=None, query=None, **kwargs):
+    if query is None:
+        query = Session.query(model)
     return query.filter_by(**kwargs).one()
 
 

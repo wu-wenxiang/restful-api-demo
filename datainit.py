@@ -3,6 +3,7 @@ from sqlalchemy.orm import sessionmaker
 
 import config
 from rest_demo.model import Base
+from rest_demo.model import book
 from rest_demo.model import user
 from rest_demo.package import utils
 
@@ -21,6 +22,14 @@ def init_db():
         email='tom.cat@test.com'
     )
     session.add(admin)
+    session.commit()
+    session.refresh(admin)
+
+    admin_book1 = book.Book(
+        name='Book-1',
+        user=admin
+    )
+    session.add(admin_book1)
     session.commit()
 
 
