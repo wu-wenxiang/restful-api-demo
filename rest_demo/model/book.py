@@ -1,6 +1,5 @@
 from sqlalchemy import Column, ForeignKey
 from sqlalchemy import Integer
-from sqlalchemy.orm import relationship
 from sqlalchemy import String
 
 from . import Base
