@@ -2,7 +2,7 @@ from rest_demo import db
 from rest_demo.model.book import Book
 from rest_demo.model import Session
 
-# from sqlalchemy.orm import joinedload
+from sqlalchemy.orm import joinedload
 from sqlalchemy import select
 
 
@@ -12,9 +12,9 @@ def create(book):
 
 
 def get(id):
-    # TODO(wu.wenxiang) joinload not work in select
+    # TODO(wu.wenxiang) refact db.get
     # https://docs.sqlalchemy.org/en/14/tutorial/orm_related_objects.html
-    stmt = select(Book).where(Book.id == id)
+    stmt = select(Book).options(joinedload(Book.user)).where(Book.id == id)
     return Session.execute(stmt).scalars().one()
     # return db.get(query=query, id=id)
 
