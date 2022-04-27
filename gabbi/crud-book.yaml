@@ -1,0 +1,62 @@
+fixtures:
+- ConfigFixture
+- SampleDataFixture
+
+defaults:
+  ssl: False
+  request_headers:
+    content-type: application/json
+    accept: application/json
+
+tests:
+- name: signin
+  url: /v1/tokens
+  method: POST
+  data:
+    auth:
+      methods:
+      - password
+      password:
+        account: admin
+        password: "123456"
+  status: 200
+  # TODO(wu.wenxiang) TOKEN expire setting
+  # TODO(wu.wenxiang) page_num & page_size
+  # TODO(wu.wenxiang) API doc
+  # TODO(wu.wenxiang) 级联删除
+  # TODO(wu.wenxiang) 多对多，一对多
+- name: list-books-1
+  url: /v1/books?page_size=-1
+  method: GET
+  request_headers:
+    cookie: token=$HISTORY['signin'].$RESPONSE['$.token']
+  status: 200
+- name: create-book
+  url: /v1/books
+  method: POST
+  request_headers:
+    cookie: token=$HISTORY['signin'].$RESPONSE['$.token']
+  data:
+    book:
+      name: testName
+      user_id: 1
+  status: 200
+  response_json_paths:
+    $.name: testName
+    $.user_id: 1
+- name: get-book-1
+  url: /v1/books/$HISTORY['create-book'].$RESPONSE['$.id']
+  method: GET
+  request_headers:
+    cookie: token=$HISTORY['signin'].$RESPONSE['$.token']
+  status: 200
+  response_json_paths:
+    $.id: $HISTORY['create-book'].$RESPONSE['$.id']
+    $.name: testName
+    $.user_id: 1
+- name: delete-book
+  url: /v1/books/$HISTORY['create-book'].$RESPONSE['$.id']
+  method: DELETE
+  request_headers:
+    cookie: token=$HISTORY['signin'].$RESPONSE['$.token']
+  status: 200
