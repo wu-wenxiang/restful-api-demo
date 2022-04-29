@@ -16,16 +16,14 @@ def create(user):
 
 
 def get(id):
-    # TODO(wu.wenxiang) joinload not work in select
-    # https://docs.sqlalchemy.org/en/14/tutorial/orm_related_objects.html
-    stmt = select(User).where(User.id == id)
-    return Session.execute(stmt).scalars().one()
-    # return db.get(query=query, id=id)
+    filters = (User.id == id,)
+    return db.get(model=User, filters=filters)
 
 
 def list():
-    return db.list(User)
+    return db.list(model=User)
 
 
 def delete(id):
-    return db.delete(User, id=id)
+    filters = (User.id == id,)
+    db.delete(model=User, filters=filters)
