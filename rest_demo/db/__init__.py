@@ -63,6 +63,7 @@ def list(model=None, query=None, filters=()):
 
 
 # https://docs.sqlalchemy.org/en/14/tutorial/orm_data_manipulation.html?highlight=delete#orm-enabled-delete-statements
+@try_db
 def delete(model=None, query=None, filters=()):
     if query is None:
         query = sqlalchemy_delete(model)

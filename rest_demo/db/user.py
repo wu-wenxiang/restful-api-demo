@@ -1,9 +1,8 @@
 from rest_demo import db
-from rest_demo.model import Session
 from rest_demo.model.user import User
 from rest_demo.package import utils
 
-# from sqlalchemy.orm import joinedload
+from sqlalchemy.orm import selectinload
 from sqlalchemy import select
 
 
@@ -16,8 +15,9 @@ def create(user):
 
 
 def get(id):
-    filters = (User.id == id,)
-    return db.get(model=User, filters=filters)
+    query = select(User).options(selectinload(User.books)).where(
+        User.id == id)
+    return db.get(query=query)
 
 
 def list():
